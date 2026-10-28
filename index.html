@@ -17,7 +17,7 @@
   --ink: #0B1F3A;
   --muted: #52637A;
   --line: #DCE4EF;
-  --accent: #1F6FEB;      /* trust blue: actions and highlights */
+  --accent: #1A62D6;      /* trust blue: actions and highlights */
   --accent-ink: #FFFFFF;
   --blue: #1A5BC4;        /* working colour: links, live data */
   --band: #0B2545;        /* deep navy bands */
@@ -25,6 +25,7 @@
   --band-muted: #9DB0CC;
   --band-accent: #6FB1FF;
   --ok: #138A55;
+  --danger: #C62828;
   --warn: #B86E00;
   --shadow: 0 1px 2px rgba(11,31,58,.06), 0 14px 36px -14px rgba(11,37,69,.22);
   --f-display: "Heebo", "Assistant", "Arial Hebrew", system-ui, sans-serif;
@@ -36,14 +37,14 @@
   :root:not([data-theme="light"]) {
     --bg: #08111F; --surface: #0F1C30; --ink: #E8EEF7; --muted: #9DB0CC; --line: #1F3150;
     --accent: #4C9BFF; --accent-ink: #06101F; --blue: #7FB0FF; --band: #050C18; --band-fg: #E8EEF7; --band-muted: #8EA2C0; --band-accent: #6FB1FF;
-    --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+    --ok: #3CCB89; --danger: #FF7A70; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #08111F; --surface: #0F1C30; --ink: #E8EEF7; --muted: #9DB0CC; --line: #1F3150;
     --accent: #4C9BFF; --accent-ink: #06101F; --blue: #7FB0FF; --band: #050C18; --band-fg: #E8EEF7; --band-muted: #8EA2C0; --band-accent: #6FB1FF;
-    --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+    --ok: #3CCB89; --danger: #FF7A70; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
   color-scheme: dark;
 }
 
@@ -89,6 +90,9 @@ p { margin: 0; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px var(--accent); }
 .btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
 .btn-ghost:hover { border-color: var(--ink); }
+
+.skip { position: absolute; inset-inline-start: 16px; top: -60px; z-index: 100; background: var(--accent); color: var(--accent-ink); padding: 12px 18px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: top .2s; }
+.skip:focus { top: calc(12px + env(safe-area-inset-top, 0px)); }
 
 /* ---------- progress + header ---------- */
 .progress { position: fixed; inset: 0 0 auto; height: 3px; z-index: 60; pointer-events: none; }
@@ -176,7 +180,13 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 @keyframes toast { 0%, 8% { opacity: 0; transform: translateY(12px); } 14%, 70% { opacity: 1; transform: none; } 78%, 100% { opacity: 0; transform: translateY(12px); } }
 
 /* ---------- marquee ---------- */
-.ticker { background: var(--band); color: var(--band-fg); overflow: hidden; padding-block: 18px; border-block: 1px solid var(--line); }
+.ticker { background: var(--band); color: var(--band-fg); overflow: hidden; padding-block: 18px; border-block: 1px solid var(--line); position: relative; }
+.ticker.paused .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+.ticker-pause {
+  position: absolute; inset-block: 0; inset-inline-end: 0; z-index: 2; width: 56px; display: grid; place-items: center; cursor: pointer;
+  border: 0; color: var(--band-fg); background: linear-gradient(to left, var(--band) 60%, transparent);
+}
+.ticker-pause svg { width: 20px; height: 20px; }
 .ticker-track { display: flex; gap: 0; width: max-content; animation: slide 38s linear infinite; }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker ul { display: flex; list-style: none; margin: 0; padding: 0; }
@@ -292,7 +302,7 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .reach small { color: var(--band-muted); font-size: 15px; }
 .reach-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .reach a.tel { font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 3vw, 34px); color: var(--band-fg); text-decoration: none; direction: ltr; user-select: all; }
-.copy { font: 700 14px var(--f-body); color: var(--band-fg); background: transparent; border: 1px solid color-mix(in srgb, var(--band-fg) 25%, transparent); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.copy { font: 700 15px var(--f-body); color: var(--band-fg); background: transparent; border: 1px solid color-mix(in srgb, var(--band-fg) 25%, transparent); border-radius: 999px; min-height: 44px; padding: 0 18px; cursor: pointer; }
 .copy:hover { border-color: var(--band-fg); }
 form.card { background: var(--surface); color: var(--ink); border-radius: 20px; padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; box-shadow: var(--shadow); }
 .field { display: grid; gap: 6px; }
@@ -304,12 +314,27 @@ form.card { background: var(--surface); color: var(--ink); border-radius: 20px; 
 .field textarea { min-height: 96px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.err { color: #D33A2C; font-size: 14px; font-weight: 600; }
+.err { color: var(--danger); font-size: 14px; font-weight: 600; }
+.field-err { color: var(--danger); font-size: 14px; font-weight: 600; }
+.field input[aria-invalid="true"] { border-color: var(--danger); }
 .sent { display: grid; gap: 12px; padding: 18px; border-radius: 14px; background: color-mix(in srgb, var(--ok) 12%, transparent); }
 .sent b { font-size: 18px; }
 .sent a { color: var(--ok); font-weight: 800; }
 form.card h3 { font-size: 24px; }
 form.card > p.sub { color: var(--muted); font-size: 16px; margin-top: -8px; }
+
+.mbar { display: none; }
+@media (max-width: 600px) {
+  .mbar {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; inset: auto 0 0; z-index: 55;
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line); transform: translateY(0); transition: transform .3s ease;
+  }
+  .mbar .btn { padding: 14px 12px; font-size: 16px; min-height: 48px; }
+  .mbar.away { transform: translateY(110%); }
+  footer { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
 
 footer { background: var(--band); color: var(--band-muted); border-top: 1px solid color-mix(in srgb, var(--band-fg) 10%, transparent); }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 28px; font-size: 15px; }
@@ -366,6 +391,7 @@ footer .logo b span { position: relative; z-index: 1; }
 </head>
 <body>
 <div class="site" dir="rtl" lang="he">
+<a class="skip" href="#solve">דלגו לתוכן</a>
 
 <div class="progress" aria-hidden="true"><span></span></div>
 
@@ -435,7 +461,8 @@ footer .logo b span { position: relative; z-index: 1; }
 </section>
 
 <!-- TICKER -->
-<div class="ticker" aria-label="מה אנחנו בונים">
+<div class="ticker" id="ticker" aria-label="מה אנחנו בונים">
+  <button class="ticker-pause" type="button" id="ticker-pause" aria-pressed="false" aria-label="עצירת התנועה"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
   <div class="ticker-track">
     <ul><li>אתרי תדמית</li><li>דפי נחיתה</li><li>חנויות אונליין</li><li>אפליקציות</li><li>מערכות CRM</li><li>ניהול תורים</li><li>אוטומציות וואטסאפ</li><li>דשבורדים ודוחות</li><li>חיבור לסליקה וחשבוניות</li></ul>
     <ul aria-hidden="true"><li>אתרי תדמית</li><li>דפי נחיתה</li><li>חנויות אונליין</li><li>אפליקציות</li><li>מערכות CRM</li><li>ניהול תורים</li><li>אוטומציות וואטסאפ</li><li>דשבורדים ודוחות</li><li>חיבור לסליקה וחשבוניות</li></ul>
@@ -608,8 +635,8 @@ footer .logo b span { position: relative; z-index: 1; }
       <h3>השאירו פרטים ונחזור אליכם</h3>
       <p class="sub">ממלאים דקה, ואנחנו מתקשרים לתאם שיחת ייעוץ.</p>
       <div class="two">
-        <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name" placeholder="ישראל ישראלי" required></div>
-        <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" style="text-align:right" required></div>
+        <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name" placeholder="ישראל ישראלי" required aria-describedby="e-name"><span class="field-err" id="e-name" hidden>נא למלא שם</span></div>
+        <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" style="text-align:right" required aria-describedby="e-phone"><span class="field-err" id="e-phone" hidden>נא למלא מספר טלפון תקין</span></div>
       </div>
       <div class="field"><label for="f-biz">שם העסק ותחום</label><input id="f-biz" name="biz" placeholder="למשל: סטודיו לפילאטיס בחיפה"></div>
       <div class="field"><label for="f-need">מה אתם צריכים?</label>
@@ -636,6 +663,11 @@ footer .logo b span { position: relative; z-index: 1; }
 </section>
 
 </main>
+
+<div class="mbar" id="mbar">
+  <a class="btn btn-ghost" href="tel:+972500000000">התקשרו</a>
+  <a class="btn btn-primary" href="#contact">השאירו פרטים</a>
+</div>
 
 <footer>
   <div class="wrap">
@@ -712,7 +744,14 @@ footer .logo b span { position: relative; z-index: 1; }
     e.preventDefault();
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var err = document.getElementById("f-err");
-    if (!v("f-name") || !v("f-phone")) { err.textContent = "נא למלא שם ומספר טלפון כדי שנוכל לחזור אליכם."; err.hidden = false; return; }
+    var bad = [];
+    [["f-name", "e-name", v("f-name").length > 1], ["f-phone", "e-phone", v("f-phone").replace(/\D/g, "").length >= 9]].forEach(function (f) {
+      var el = document.getElementById(f[0]);
+      el.setAttribute("aria-invalid", f[2] ? "false" : "true");
+      document.getElementById(f[1]).hidden = f[2];
+      if (!f[2]) bad.push(el);
+    });
+    if (bad.length) { bad[0].focus(); return; }
     err.hidden = true;
     var text = "היי תכלס, אשמח לשיחת ייעוץ.\n" +
       "שם: " + v("f-name") + "\nטלפון: " + v("f-phone") +
@@ -739,6 +778,22 @@ footer .logo b span { position: relative; z-index: 1; }
         btn.disabled = false;
       });
   });
+
+  var tk = document.getElementById("ticker"), tp = document.getElementById("ticker-pause");
+  tp.addEventListener("click", function () {
+    var on = tk.classList.toggle("paused");
+    tp.setAttribute("aria-pressed", on ? "true" : "false");
+    tp.setAttribute("aria-label", on ? "הפעלת התנועה" : "עצירת התנועה");
+    tp.innerHTML = on ? '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 5v14L6 12z"/></svg>'
+                      : '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  });
+
+  // Mobile action bar steps aside while the contact section is on screen
+  var mbar = document.getElementById("mbar");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) { mbar.classList.toggle("away", es[0].isIntersecting); }, { threshold: 0.15 })
+      .observe(document.getElementById("contact"));
+  }
 
   document.getElementById("copy-phone").addEventListener("click", function (e) {
     var b = e.currentTarget, num = document.getElementById("phone").textContent;

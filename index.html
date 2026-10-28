@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>תכלס דיגיטל</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="תכלס דיגיטל בונה לעסקים אתרים, אפליקציות ומערכות ניהול לפי מה שהעסק צריך, ומלווה אותם בניהול חודשי.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Secular+One&display=swap">
+<style>
+/* Layout: one 1180px column; full-width bands alternate paper / ink; hero splits copy + live system mock */
+:root {
+  --bg: #F3F5F9;
+  --surface: #FFFFFF;
+  --ink: #0D1B2E;
+  --muted: #56647A;
+  --line: #DCE2EC;
+  --accent: #FFCC2E;      /* highlighter yellow: the "תכלס" mark */
+  --accent-ink: #1A1400;
+  --blue: #2350E0;        /* working colour: links, live data */
+  --band: #0D1B2E;        /* dark bands */
+  --band-fg: #E9EEF6;
+  --band-muted: #9AA8BE;
+  --ok: #17915A;
+  --warn: #C77700;
+  --shadow: 0 1px 2px rgba(13,27,46,.06), 0 12px 32px -12px rgba(13,27,46,.18);
+  --f-display: "Secular One", "Assistant", "Arial Hebrew", system-ui, sans-serif;
+  --f-body: "Assistant", "Arial Hebrew", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A111D; --surface: #111B2B; --ink: #E9EEF6; --muted: #9AA8BE; --line: #23314A;
+    --accent: #FFD23F; --accent-ink: #1A1400; --blue: #6F93FF; --band: #050A13; --band-fg: #E9EEF6; --band-muted: #8A98AE;
+    --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A111D; --surface: #111B2B; --ink: #E9EEF6; --muted: #9AA8BE; --line: #23314A;
+  --accent: #FFD23F; --accent-ink: #1A1400; --blue: #6F93FF; --band: #050A13; --band-fg: #E9EEF6; --band-muted: #8A98AE;
+  --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 18px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+.site { direction: rtl; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -.005em; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: 1180px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  font-family: var(--f-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--blue); display: inline-flex; gap: 10px; align-items: center;
+}
+.eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+.mark {
+  background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%);
+  background-size: 100% 100%; background-repeat: no-repeat; padding-inline: 4px; color: inherit;
+}
+.section { padding-block: clamp(72px, 10vw, 128px); }
+.section-head { display: grid; gap: 14px; max-width: 720px; margin-bottom: 48px; }
+.section-head h2 { font-size: clamp(32px, 4.6vw, 52px); }
+.section-head p { color: var(--muted); font-size: 19px; max-width: 60ch; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+  font: 700 17px/1 var(--f-body); padding: 16px 26px; border-radius: 999px; text-decoration: none;
+  border: 2px solid transparent; cursor: pointer; transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.btn svg { width: 18px; height: 18px; transition: transform .25s ease; }
+.btn:hover svg { transform: translateX(-4px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 24px -10px var(--accent); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px var(--accent); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--ink); }
+
+/* ---------- progress + header ---------- */
+.progress { position: fixed; inset: 0 0 auto; height: 3px; z-index: 60; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--accent); transform-origin: right; transform: scaleX(0); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 16px; }
+.logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+.logo b { font-family: var(--f-display); font-weight: 400; font-size: 30px; line-height: 1; position: relative; }
+.logo b::after { content: ""; position: absolute; inset: auto -3px 2px -3px; height: 9px; background: var(--accent); z-index: -1; border-radius: 2px; }
+.logo small { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; }
+nav.links { display: flex; gap: 28px; }
+nav.links a { text-decoration: none; font-weight: 600; color: var(--muted); position: relative; transition: color .2s; }
+nav.links a::after { content: ""; position: absolute; inset: auto 0 -4px; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+nav.links a:hover { color: var(--ink); }
+nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
+.top .btn { padding: 12px 20px; font-size: 16px; }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(56px, 8vw, 100px); position: relative; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .55;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, #000 20%, transparent 75%);
+}
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero-copy { display: grid; gap: 26px; min-width: 0; }
+.hero h1 { font-size: clamp(42px, 6.4vw, 80px); }
+.hero h1 .line { display: block; }
+.hero-copy > p { font-size: clamp(18px, 1.6vw, 21px); color: var(--muted); max-width: 52ch; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.promises { display: flex; flex-wrap: wrap; gap: 10px 22px; list-style: none; padding: 0; margin: 0; font-weight: 600; font-size: 16px; }
+.promises li { display: flex; gap: 8px; align-items: center; }
+.promises svg { width: 18px; height: 18px; color: var(--ok); flex: none; }
+
+.load { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 110ms + 80ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+/* live system mock */
+.app {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
+  overflow: hidden; min-width: 0; position: relative; font-size: 14px;
+  transform: perspective(1400px) rotateY(-6deg) rotateX(3deg); transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.app:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
+.app-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.app-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.app-bar span { margin-inline-start: auto; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.demo-tag { font-family: var(--f-mono); font-size: 11px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--muted); }
+.app-body { padding: 18px; display: grid; gap: 16px; }
+.app-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.app-title h3 { font-family: var(--f-body); font-weight: 800; font-size: 18px; }
+.app-title small { color: var(--muted); }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.kpi { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
+.kpi small { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi b { font-family: var(--f-mono); font-weight: 500; font-size: 20px; font-variant-numeric: tabular-nums; }
+.kpi em { font-style: normal; font-size: 12px; color: var(--ok); font-weight: 700; }
+.chart { display: grid; gap: 6px; }
+.chart-head { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+.bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 92px; border-bottom: 1px solid var(--line); }
+.bars div { background: color-mix(in srgb, var(--blue) 22%, transparent); border-radius: 6px 6px 2px 2px; height: var(--h); transform-origin: bottom; animation: grow 1s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d) * 70ms + 600ms); }
+.bars div.now { background: var(--blue); }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; font-size: 11px; color: var(--muted); }
+@keyframes grow { from { transform: scaleY(0); } }
+.rows { display: grid; gap: 6px; }
+.row { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--bg); animation: rise .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d) * 120ms + 900ms); }
+.row time { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.row span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+.pill { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, transparent); }
+.pill.wait { color: var(--warn); background: color-mix(in srgb, var(--warn) 16%, transparent); }
+.toast {
+  position: absolute; inset-inline-start: 16px; bottom: 16px; display: flex; gap: 10px; align-items: center;
+  background: var(--ink); color: var(--bg); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-weight: 600;
+  box-shadow: var(--shadow); animation: toast 6s 2s ease-in-out infinite both;
+}
+.toast i { width: 22px; height: 22px; border-radius: 50%; background: var(--ok); display: grid; place-items: center; color: #fff; font-style: normal; font-size: 13px; }
+@keyframes toast { 0%, 8% { opacity: 0; transform: translateY(12px); } 14%, 70% { opacity: 1; transform: none; } 78%, 100% { opacity: 0; transform: translateY(12px); } }
+
+/* ---------- marquee ---------- */
+.ticker { background: var(--band); color: var(--band-fg); overflow: hidden; padding-block: 18px; border-block: 1px solid var(--line); }
+.ticker-track { display: flex; gap: 0; width: max-content; animation: slide 38s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker ul { display: flex; list-style: none; margin: 0; padding: 0; }
+.ticker li { font-family: var(--f-display); font-size: 22px; padding-inline: 28px; white-space: nowrap; display: flex; align-items: center; gap: 28px; }
+.ticker li::after { content: ""; width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg); }
+@keyframes slide { to { transform: translateX(50%); } }
+
+/* ---------- problem picker ---------- */
+.picker { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+.problems { display: grid; gap: 10px; }
+.problem {
+  text-align: start; font: 600 18px/1.4 var(--f-body); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; cursor: pointer;
+  display: flex; gap: 14px; align-items: center; transition: border-color .2s, transform .2s, background .2s;
+}
+.problem:hover { border-color: var(--ink); transform: translateX(-4px); }
+.problem[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.problem .q { font-family: var(--f-mono); font-size: 13px; opacity: .6; }
+.problem svg { width: 20px; height: 20px; margin-inline-start: auto; flex: none; opacity: 0; transition: opacity .2s, transform .2s; }
+.problem[aria-selected="true"] svg { opacity: 1; transform: translateX(-4px); }
+.ticket {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; position: sticky; top: 100px;
+}
+.ticket-head { display: flex; justify-content: space-between; gap: 12px; padding: 18px 24px; border-bottom: 1px dashed var(--line); font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.ticket-body { padding: 24px; display: grid; gap: 18px; }
+.ticket-body.swap { animation: rise .45s cubic-bezier(.2,.7,.2,1); }
+.ticket h3 { font-size: clamp(26px, 3vw, 34px); }
+.ticket .sol { color: var(--muted); }
+.ticket ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.ticket li { display: flex; gap: 10px; align-items: flex-start; }
+.ticket li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 10px; background: var(--accent); transform: rotate(45deg); }
+.ticket dl { margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.ticket dl div { padding: 16px 24px; display: grid; gap: 2px; }
+.ticket dl div + div { border-inline-start: 1px solid var(--line); }
+.ticket dt { font-size: 13px; color: var(--muted); }
+.ticket dd { margin: 0; font-family: var(--f-mono); font-size: 17px; font-variant-numeric: tabular-nums; }
+
+/* ---------- services ---------- */
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.svc {
+  --mx: 50%; --my: 0%;
+  background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%), var(--surface);
+  border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: grid; gap: 16px; align-content: start;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s; min-width: 0;
+}
+.svc:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); box-shadow: var(--shadow); }
+.svc-icon { width: 54px; height: 54px; border-radius: 14px; background: var(--ink); color: var(--accent); display: grid; place-items: center; }
+.svc-icon svg { width: 28px; height: 28px; }
+.svc h3 { font-size: 28px; }
+.svc p { color: var(--muted); }
+.svc ul { margin: 0; padding: 16px 0 0; list-style: none; border-top: 1px solid var(--line); display: grid; gap: 8px; font-weight: 600; font-size: 16px; }
+.svc li { display: flex; gap: 10px; align-items: center; }
+.svc li svg { width: 16px; height: 16px; color: var(--blue); flex: none; }
+
+/* ---------- process (dark band) ---------- */
+.band { background: var(--band); color: var(--band-fg); }
+.band .section-head p { color: var(--band-muted); }
+.band .eyebrow { color: var(--accent); }
+.steps-wrap { position: relative; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+.steps-wrap::before { content: ""; position: absolute; inset: 27px 0 auto; height: 2px; background: color-mix(in srgb, var(--band-fg) 16%, transparent); }
+.steps-wrap .fill { position: absolute; inset: 27px 0 auto; height: 2px; background: var(--accent); transform-origin: right; transform: scaleX(1); }
+.step { position: relative; display: grid; gap: 12px; align-content: start; }
+.step .num {
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--band); border: 2px solid var(--accent); color: var(--accent); font-family: var(--f-mono); font-size: 18px; position: relative;
+}
+.step h3 { font-size: 24px; margin-top: 8px; }
+.step p { color: var(--band-muted); font-size: 17px; }
+.step .when { font-family: var(--f-mono); font-size: 13px; color: var(--accent); }
+
+/* ---------- commitments ---------- */
+.why { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+.why .section-head { position: sticky; top: 110px; margin-bottom: 0; }
+.commit { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.commit div { padding: 28px 0 28px 24px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.commit div:nth-child(even) { padding-inline: 24px 0; border-inline-start: 1px solid var(--line); }
+.commit h3 { font-family: var(--f-body); font-weight: 800; font-size: 20px; display: flex; gap: 10px; align-items: center; }
+.commit h3 svg { width: 22px; height: 22px; color: var(--blue); flex: none; }
+.commit p { color: var(--muted); font-size: 17px; }
+
+/* ---------- pricing ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: grid; gap: 18px; grid-template-rows: auto auto auto 1fr auto; transition: transform .3s, box-shadow .3s; }
+.plan:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.plan.hot { border: 2px solid var(--ink); position: relative; }
+.plan.hot::before { content: "הכי מבוקש"; position: absolute; top: -14px; inset-inline-start: 24px; background: var(--accent); color: var(--accent-ink); font-weight: 800; font-size: 13px; padding: 4px 12px; border-radius: 999px; }
+.plan h3 { font-size: 26px; }
+.plan > p { color: var(--muted); font-size: 16px; }
+.price { display: grid; gap: 4px; padding-block: 16px; border-block: 1px solid var(--line); }
+.price .setup { display: flex; align-items: baseline; gap: 8px; }
+.price .setup small, .price .monthly small { color: var(--muted); font-size: 14px; }
+.price b { font-family: var(--f-mono); font-weight: 500; font-size: 34px; font-variant-numeric: tabular-nums; }
+.price .monthly { font-family: var(--f-mono); font-size: 16px; }
+.plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; align-content: start; font-size: 16px; }
+.plan li { display: flex; gap: 10px; }
+.plan li svg { width: 18px; height: 18px; color: var(--ok); flex: none; margin-top: 4px; }
+.plan .btn { width: 100%; }
+.note { margin-top: 24px; color: var(--muted); font-size: 15px; }
+.monthly-box { margin-top: 40px; display: grid; grid-template-columns: auto 1fr; gap: 24px 40px; align-items: center; background: var(--ink); color: var(--bg); border-radius: 18px; padding: 32px; }
+.monthly-box h3 { font-size: 28px; }
+.monthly-box ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+.monthly-box li { border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); border-radius: 999px; padding: 6px 14px; font-size: 15px; font-weight: 600; }
+
+/* ---------- faq ---------- */
+.faq { display: grid; gap: 0; border-top: 1px solid var(--line); max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; padding: 24px 0; font-weight: 700; font-size: 20px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary i { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); position: relative; transition: transform .3s, background .3s; }
+.faq summary i::before, .faq summary i::after { content: ""; position: absolute; inset: 50% 9px auto; height: 2px; margin-top: -1px; background: var(--ink); }
+.faq summary i::after { transform: rotate(90deg); transition: transform .3s; }
+.faq details[open] summary i { background: var(--accent); border-color: var(--accent); }
+.faq details[open] summary i::after { transform: rotate(0); }
+.faq details p { color: var(--muted); padding-bottom: 24px; max-width: 65ch; }
+.faq details[open] p { animation: rise .4s ease both; }
+
+/* ---------- contact ---------- */
+.contact .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+.contact h2 { font-size: clamp(36px, 5.4vw, 64px); }
+.contact .lead { display: grid; gap: 22px; }
+.contact .lead p { color: var(--band-muted); font-size: 19px; }
+.contact .lead ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-weight: 600; }
+.contact .lead li { display: flex; gap: 10px; align-items: center; }
+.contact .lead li svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+form.card { background: var(--surface); color: var(--ink); border-radius: 20px; padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; box-shadow: var(--shadow); }
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 700; font-size: 15px; }
+.field input, .field select, .field textarea {
+  font: 500 17px var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; width: 100%;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.err { color: #D33A2C; font-size: 14px; font-weight: 600; }
+.sent { display: grid; gap: 12px; padding: 18px; border-radius: 14px; background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.sent b { font-size: 18px; }
+.sent a { color: var(--ok); font-weight: 800; }
+
+footer { background: var(--band); color: var(--band-muted); border-top: 1px solid color-mix(in srgb, var(--band-fg) 10%, transparent); }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 28px; font-size: 15px; }
+footer .logo b { color: var(--band-fg); font-size: 24px; }
+footer .logo b::after { z-index: 0; opacity: .9; }
+footer .logo b span { position: relative; z-index: 1; }
+
+/* ---------- scroll-driven motion (progressive; content is fully visible without it) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+    .reveal-stagger > * { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    .progress span { animation: grow-x linear both; animation-timeline: scroll(root); }
+    header.top { animation: header-on linear both; animation-timeline: scroll(root); animation-range: 0 120px; }
+    .steps-wrap .fill { animation: grow-x linear both; animation-timeline: view(); animation-range: cover 10% cover 55%; }
+    .hero .app-wrap { animation: drift linear both; animation-timeline: scroll(root); animation-range: 0 700px; }
+    .ticker li { animation: none; }
+  }
+}
+@keyframes reveal { from { opacity: 0; transform: translateY(48px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes header-on { to { border-bottom-color: var(--line); box-shadow: 0 8px 24px -18px rgba(13,27,46,.5); } }
+@keyframes drift { to { transform: translateY(-60px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+  .ticker-track { animation: none !important; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  nav.links { display: none; }
+  .hero .wrap, .picker, .why, .contact .wrap { grid-template-columns: 1fr; }
+  .app { transform: none; }
+  .services, .plans { grid-template-columns: 1fr; max-width: 560px; }
+  .steps { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+  .steps-wrap::before, .steps-wrap .fill { display: none; }
+  .why .section-head, .ticket { position: static; }
+  .monthly-box { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  .steps, .commit, .two { grid-template-columns: 1fr; }
+  .commit div, .commit div:nth-child(even) { padding-inline: 0; border-inline-start: 0; }
+  .ticket dl { grid-template-columns: 1fr; }
+  .ticket dl div + div { border-inline-start: 0; border-top: 1px solid var(--line); }
+  .kpis { grid-template-columns: 1fr 1fr; }
+  .kpis .kpi:last-child { display: none; }
+  .top .btn { display: none; }
+  .ticker li { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+<div class="site" dir="rtl" lang="he">
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="תכלס דיגיטל, לראש העמוד"><b>תכלס</b><small>DIGITAL</small></a>
+    <nav class="links" aria-label="ניווט ראשי">
+      <a href="#solve">מה הבעיה?</a>
+      <a href="#services">שירותים</a>
+      <a href="#process">איך זה עובד</a>
+      <a href="#pricing">מחירים</a>
+      <a href="#faq">שאלות</a>
+    </nav>
+    <a class="btn btn-primary" href="#contact">לשיחת אפיון</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow load" style="--i:0">סטודיו לבניית מערכות לעסקים</span>
+      <h1 class="load" style="--i:1"><span class="line">יש בעיה בעסק?</span><span class="line"><span class="mark">בונים לה פתרון.</span></span></h1>
+      <p class="load" style="--i:2">אתר, אפליקציה או מערכת ניהול. אתם מספרים לנו מה תוקע את העסק, אנחנו בונים בדיוק את מה שצריך, מעלים לאוויר ונשארים איתכם עם ניהול חודשי. בלי שפה טכנית ובלי הפתעות במחיר.</p>
+      <div class="hero-cta load" style="--i:3">
+        <a class="btn btn-primary" href="#contact">ספרו לנו מה צריך
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#solve">איך זה נראה אצלכם</a>
+      </div>
+      <ul class="promises load" style="--i:4">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>שיחת אפיון בלי עלות</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מחיר סגור לפני שמתחילים</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>עדכון התקדמות כל שבוע</li>
+      </ul>
+    </div>
+
+    <div class="app-wrap load" style="--i:3">
+      <div class="app" role="img" aria-label="הדגמה של מערכת ניהול תורים ולקוחות שאנחנו בונים לעסקים">
+        <div class="app-bar"><i></i><i></i><i></i><span>admin.studio-dana.co.il</span></div>
+        <div class="app-body">
+          <div class="app-title"><h3>סטודיו דנה · לוח בקרה</h3><span class="demo-tag">הדגמה</span></div>
+          <div class="kpis">
+            <div class="kpi"><small>תורים השבוע</small><b>64</b><em>+18%</em></div>
+            <div class="kpi"><small>הכנסות החודש</small><b>₪23,480</b><em>+9%</em></div>
+            <div class="kpi"><small>ביטולים</small><b>2</b><em>−6</em></div>
+          </div>
+          <div class="chart">
+            <div class="chart-head"><span>תורים לפי יום</span><span>השבוע</span></div>
+            <div class="bars">
+              <div style="--h:48%;--d:0"></div><div style="--h:70%;--d:1"></div><div style="--h:58%;--d:2"></div>
+              <div style="--h:86%;--d:3"></div><div class="now" style="--h:94%;--d:4"></div><div style="--h:40%;--d:5"></div><div style="--h:12%;--d:6"></div>
+            </div>
+            <div class="days"><span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span></div>
+          </div>
+          <div class="rows">
+            <div class="row" style="--d:0"><time>09:30</time><span>מיכל אברהם · טיפול פנים</span><b class="pill ok">אישרה</b></div>
+            <div class="row" style="--d:1"><time>11:00</time><span>נועה לוי · מניקור ג׳ל</span><b class="pill ok">אישרה</b></div>
+            <div class="row" style="--d:2"><time>13:15</time><span>שירן כהן · הסרת שיער</span><b class="pill wait">ממתין</b></div>
+          </div>
+        </div>
+        <div class="toast" aria-hidden="true"><i>✓</i>תזכורת נשלחה בוואטסאפ לשירן</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-label="מה אנחנו בונים">
+  <div class="ticker-track">
+    <ul><li>אתרי תדמית</li><li>דפי נחיתה</li><li>חנויות אונליין</li><li>אפליקציות</li><li>מערכות CRM</li><li>ניהול תורים</li><li>אוטומציות וואטסאפ</li><li>דשבורדים ודוחות</li><li>חיבור לסליקה וחשבוניות</li></ul>
+    <ul aria-hidden="true"><li>אתרי תדמית</li><li>דפי נחיתה</li><li>חנויות אונליין</li><li>אפליקציות</li><li>מערכות CRM</li><li>ניהול תורים</li><li>אוטומציות וואטסאפ</li><li>דשבורדים ודוחות</li><li>חיבור לסליקה וחשבוניות</li></ul>
+  </div>
+</div>
+
+<!-- PROBLEM PICKER -->
+<section class="section" id="solve">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">מתחילים מהבעיה</span>
+      <h2>מה <span class="mark">תוקע</span> אתכם היום?</h2>
+      <p>בחרו את המשפט שהכי מתאים לעסק שלכם, ותראו מה היינו בונים לכם, כמה זמן זה לוקח ואיך זה מתומחר.</p>
+    </div>
+    <div class="picker">
+      <div class="problems" role="tablist" aria-label="בעיות נפוצות בעסקים">
+        <button class="problem" role="tab" id="p0" aria-selected="true" aria-controls="ticket"><span class="q">01</span>אין לי אתר, ולקוחות לא מוצאים אותי בגוגל<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="problem" role="tab" id="p1" aria-selected="false" aria-controls="ticket"><span class="q">02</span>אני מנהל הכל באקסל, במחברת ובוואטסאפ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="problem" role="tab" id="p2" aria-selected="false" aria-controls="ticket"><span class="q">03</span>תיאום תורים ותזכורות לוקח לי שעות כל שבוע<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="problem" role="tab" id="p3" aria-selected="false" aria-controls="ticket"><span class="q">04</span>הלקוחות רוצים להזמין ממני ישר מהטלפון<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      </div>
+      <article class="ticket reveal" id="ticket" role="tabpanel" aria-live="polite">
+        <div class="ticket-head"><span>כרטיס עבודה</span><span id="t-id">TK-0101</span></div>
+        <div class="ticket-body" id="t-body">
+          <span class="eyebrow">מה נבנה לכם</span>
+          <h3 id="t-title">אתר תדמית שמביא פניות</h3>
+          <p class="sol" id="t-sol">אתר מהיר ומעוצב שמסביר בדיוק מה אתם עושים, מופיע בגוגל ומוביל את הגולש לשיחה או להודעת וואטסאפ.</p>
+          <ul id="t-list">
+            <li>עיצוב מותאם למותג שלכם, שנראה מצוין בטלפון</li>
+            <li>קידום אורגני בסיסי וחיבור לגוגל מפות</li>
+            <li>טופס פניות וכפתור וואטסאפ שמגיעים ישר אליכם</li>
+          </ul>
+        </div>
+        <dl>
+          <div><dt>זמן עבודה</dt><dd id="t-time">1–2 שבועות</dd></div>
+          <div><dt>הקמה החל מ־</dt><dd id="t-setup">₪2,900</dd></div>
+          <div><dt>ניהול חודשי</dt><dd id="t-month">₪190</dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">מה אנחנו בונים</span>
+      <h2>שלושה תחומים. עסק אחד שמחובר.</h2>
+      <p>אפשר להתחיל מאחד ולהוסיף בהמשך. הכל נבנה כך שיתחבר: האתר מכניס פניות, המערכת מנהלת אותן והאפליקציה שומרת את הלקוחות קרובים.</p>
+    </div>
+    <div class="services reveal-stagger">
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></div>
+        <h3>אתרים</h3>
+        <p>אתר תדמית, דף נחיתה לקמפיין או חנות אונליין. מהיר, מאובטח ובנוי כדי להפוך גולשים לפניות.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מותאם מושלם לטלפון</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מוכן לגוגל ולקמפיינים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>סליקה, חשבוניות ומשלוחים</li>
+        </ul>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <h3>אפליקציות</h3>
+        <p>אפליקציה לאייפון ולאנדרואיד או אפליקציית ווב, עם הזמנות, מועדון לקוחות והתראות ישר לטלפון.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>העלאה ל־App Store ול־Google Play</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>התראות פוש ללקוחות</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הזמנות ותשלום מתוך האפליקציה</li>
+        </ul>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>מערכות ניהול</h3>
+        <p>מערכת שמחליפה את האקסל והמחברת: לקוחות, תורים, הזמנות, מלאי ועובדים, הכל במסך אחד.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>תזכורות אוטומטיות בוואטסאפ</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>דוחות והכנסות בזמן אמת</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הרשאות לכל עובד</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section band" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">איך זה עובד</span>
+      <h2>מהשיחה הראשונה ועד שהמערכת עובדת אצלכם</h2>
+      <p>ארבעה שלבים, בלי הפתעות. בכל שלב אתם יודעים איפה הפרויקט עומד ומה הצעד הבא.</p>
+    </div>
+    <div class="steps-wrap">
+    <span class="fill" aria-hidden="true"></span>
+    <ol class="steps reveal-stagger">
+      <li class="step"><span class="num">1</span><span class="when">יום 1</span><h3>שיחת אפיון</h3><p>שומעים איך העסק עובד היום, איפה הוא נתקע ומה יעזור לו באמת. לפעמים הפתרון קטן ממה שחשבתם.</p></li>
+      <li class="step"><span class="num">2</span><span class="when">תוך 48 שעות</span><h3>הצעה במחיר סגור</h3><p>מסמך קצר: מה בונים, איך זה ייראה, כמה זמן זה לוקח וכמה זה עולה. המחיר לא משתנה באמצע.</p></li>
+      <li class="step"><span class="num">3</span><span class="when">כל שבוע</span><h3>בנייה שאתם רואים</h3><p>מקבלים קישור לגרסה עובדת ורואים את ההתקדמות בעצמכם. הערות נכנסות כבר בשבוע הבא.</p></li>
+      <li class="step"><span class="num">4</span><span class="when">מהעלייה לאוויר</span><h3>עולים ונשארים</h3><p>מעלים לאוויר, מדריכים אתכם ואת העובדים, ונשארים איתכם בניהול חודשי: תמיכה, גיבויים ושיפורים.</p></li>
+    </ol>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+  <div class="wrap why">
+    <div class="section-head reveal">
+      <span class="eyebrow">למה אנחנו</span>
+      <h2>מה מקבלים כשעובדים <span class="mark">איתנו</span></h2>
+      <p>לא מוכרים לכם טכנולוגיה. בונים לכם כלי עבודה שחוסך זמן ומכניס כסף, ומתחייבים לזה בכתב.</p>
+    </div>
+    <div class="commit reveal-stagger">
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>מחיר סגור מראש</h3><p>מה שכתוב בהצעה זה מה שמשלמים. תוספות רק אם ביקשתם אותן ואישרתם מחיר.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 7a4 4 0 1 1-4 4M11 11l-8 8M6 16l2 2M8 14l2 2"/></svg>המערכת שייכת לכם</h3><p>הקוד, הדומיין והנתונים רשומים על שמכם. לא ננעלים אצלנו.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>רואים התקדמות כל שבוע</h3><p>גרסה עובדת בקישור, לא מצגות. אתם לוחצים, בודקים ומעירים.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg>ניהול חודשי בלי התחייבות</h3><p>משלמים כל חודש ואפשר להפסיק מתי שרוצים. נשארים כי זה שווה, לא בגלל חוזה.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg>זמינים בוואטסאפ</h3><p>יש תקלה או רעיון? שולחים הודעה ומקבלים תשובה באותו יום עסקים.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>אבטחה וגיבויים</h3><p>אחסון מאובטח, תעודת SSL וגיבוי יומי. אם משהו קורה, חוזרים לאתמול בכמה דקות.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">מחירים</span>
+      <h2>הקמה חד־פעמית + ניהול חודשי</h2>
+      <p>משלמים פעם אחת על הבנייה, ואחר כך סכום חודשי קבוע שמחזיק את המערכת חיה, מעודכנת ומגובה.</p>
+    </div>
+    <div class="plans reveal-stagger">
+      <article class="plan">
+        <h3>נוכחות</h3>
+        <p>לעסק שצריך להופיע ברשת ולקבל פניות.</p>
+        <div class="price"><div class="setup"><small>החל מ־</small><b>₪2,900</b></div><div class="monthly">+ ₪190 <small>לחודש</small></div></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אתר תדמית עד 5 עמודים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>טופס פניות וכפתור וואטסאפ</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>חיבור לגוגל מפות וקידום בסיסי</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אחסון, דומיין ו־SSL</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">לבדיקת התאמה</a>
+      </article>
+      <article class="plan hot">
+        <h3>ניהול</h3>
+        <p>לעסק שרוצה להפסיק לנהל באקסל ובראש.</p>
+        <div class="price"><div class="setup"><small>החל מ־</small><b>₪7,500</b></div><div class="monthly">+ ₪390 <small>לחודש</small></div></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מערכת ניהול מותאמת לעסק</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>לקוחות, תורים, הזמנות ודוחות</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>תזכורות אוטומטיות בוואטסאפ</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>משתמשים והרשאות לעובדים</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הדרכה לצוות</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">בואו נאפיין</a>
+      </article>
+      <article class="plan">
+        <h3>אפליקציה</h3>
+        <p>לעסק שרוצה ללקוחות שלו מקום בטלפון.</p>
+        <div class="price"><div class="setup"><small>החל מ־</small><b>₪14,000</b></div><div class="monthly">+ ₪490 <small>לחודש</small></div></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אפליקציה לאייפון ולאנדרואיד</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הזמנות ותשלום באפליקציה</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>התראות פוש ומועדון לקוחות</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ממשק ניהול לבעל העסק</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">לבדיקת התאמה</a>
+      </article>
+    </div>
+    <div class="monthly-box reveal">
+      <h3>מה כולל הניהול החודשי?</h3>
+      <ul>
+        <li>אחסון ודומיין</li><li>גיבוי יומי</li><li>עדכוני אבטחה</li><li>תיקון תקלות</li><li>שינויים קטנים בתוכן</li><li>תמיכה בוואטסאפ</li><li>דוח חודשי</li>
+      </ul>
+    </div>
+    <p class="note">המחירים לפני מע״מ. המחיר הסופי נקבע אחרי שיחת האפיון ונסגר בהצעה כתובה.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">שאלות נפוצות</span>
+      <h2>מה ששואלים אותנו לפני שמתחילים</h2>
+    </div>
+    <div class="faq reveal">
+      <details open><summary>אני לא מבין בטכנולוגיה. זה בעיה?<i aria-hidden="true"></i></summary><p>ממש לא. אתם מסבירים לנו איך העסק עובד, ואנחנו מתרגמים את זה למערכת. כל ההסברים וההדרכות בשפה פשוטה.</p></details>
+      <details><summary>כמה זמן לוקח פרויקט?<i aria-hidden="true"></i></summary><p>אתר תדמית לוקח בדרך כלל שבוע עד שבועיים. מערכת ניהול שלושה עד חמישה שבועות, ואפליקציה ארבעה עד שמונה שבועות. הזמן המדויק כתוב בהצעה.</p></details>
+      <details><summary>מה קורה אם ארצה להפסיק את הניהול החודשי?<i aria-hidden="true"></i></summary><p>מודיעים לנו ומפסיקים. אנחנו מעבירים לכם את כל הקוד, הנתונים והגישות, כדי שתוכלו להמשיך לבד או עם מישהו אחר.</p></details>
+      <details><summary>אפשר להתחיל קטן ולהוסיף אחר כך?<i aria-hidden="true"></i></summary><p>כן, וזה מה שאנחנו ממליצים. מתחילים ממה שהכי כואב, ואחרי שזה עובד מוסיפים עוד חלקים. הכל בנוי כך שיתחבר.</p></details>
+      <details><summary>איך משלמים?<i aria-hidden="true"></i></summary><p>על ההקמה משלמים בשלושה חלקים לפי התקדמות: בתחילת העבודה, באמצע ובעלייה לאוויר. הניהול החודשי בהוראת קבע או בכרטיס אשראי. מקבלים חשבונית על כל תשלום.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section band contact" id="contact">
+  <div class="wrap">
+    <div class="lead reveal">
+      <span class="eyebrow">בואו נדבר תכלס</span>
+      <h2>ספרו לנו מה תוקע את העסק. נחזור אליכם עם פתרון.</h2>
+      <p>שיחת אפיון של 20 דקות, בלי עלות ובלי התחייבות. בסופה תדעו מה כדאי לבנות, כמה זמן זה ייקח וכמה זה יעלה.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>חוזרים אליכם באותו יום עסקים</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הצעת מחיר כתובה תוך 48 שעות</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אם אנחנו לא הכתובת, נגיד לכם</li>
+      </ul>
+    </div>
+    <form class="card reveal" id="lead-form" novalidate>
+      <div class="two">
+        <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name" placeholder="ישראל ישראלי" required></div>
+        <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" style="text-align:right" required></div>
+      </div>
+      <div class="field"><label for="f-biz">שם העסק ותחום</label><input id="f-biz" name="biz" placeholder="למשל: סטודיו לפילאטיס בחיפה"></div>
+      <div class="field"><label for="f-need">מה אתם צריכים?</label>
+        <select id="f-need" name="need">
+          <option>אתר</option><option>מערכת ניהול</option><option>אפליקציה</option><option>אוטומציה / חיבור בין מערכות</option><option>עוד לא בטוח, רוצה להתייעץ</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-msg">ספרו בקצרה מה הבעיה</label><textarea id="f-msg" name="msg" placeholder="למשל: אני מתאם את כל התורים בוואטסאפ ולקוחות שוכחים להגיע"></textarea></div>
+      <p class="err" id="f-err" hidden>נא למלא שם ומספר טלפון כדי שנוכל לחזור אליכם.</p>
+      <button class="btn btn-primary" type="submit">שליחה וקביעת שיחה
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="sent" id="f-sent" hidden>
+        <b>הפרטים מוכנים לשליחה.</b>
+        <span>לחצו כדי לשלוח לנו אותם בהודעת וואטסאפ, ונחזור אליכם עוד היום.</span>
+        <a id="f-wa" href="https://wa.me/" target="_blank" rel="noopener">שליחה בוואטסאפ ←</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><b><span>תכלס</span></b><small>DIGITAL</small></a>
+    <span>אתרים · אפליקציות · מערכות ניהול לעסקים</span>
+    <span>© 2026 תכלס דיגיטל</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  // Business WhatsApp number in international format, e.g. "972501234567". Empty = the visitor picks a contact.
+  var WHATSAPP_NUMBER = "";
+
+  var tickets = [
+    { id: "TK-0101", title: "אתר תדמית שמביא פניות",
+      sol: "אתר מהיר ומעוצב שמסביר בדיוק מה אתם עושים, מופיע בגוגל ומוביל את הגולש לשיחה או להודעת וואטסאפ.",
+      list: ["עיצוב מותאם למותג שלכם, שנראה מצוין בטלפון", "קידום אורגני בסיסי וחיבור לגוגל מפות", "טופס פניות וכפתור וואטסאפ שמגיעים ישר אליכם"],
+      time: "1–2 שבועות", setup: "₪2,900", month: "₪190" },
+    { id: "TK-0102", title: "מערכת ניהול לקוחות והזמנות",
+      sol: "מסך אחד שמחליף את האקסל, המחברת והקבוצות בוואטסאפ. כל לקוח, הזמנה ותשלום במקום אחד, מכל מחשב או טלפון.",
+      list: ["כרטיס לקוח עם היסטוריה מלאה", "מעקב הזמנות ותשלומים בזמן אמת", "דוח הכנסות חודשי בלחיצה"],
+      time: "3–5 שבועות", setup: "₪7,500", month: "₪390" },
+    { id: "TK-0103", title: "זימון תורים אונליין עם תזכורות",
+      sol: "הלקוחות קובעים תור לבד מהטלפון, והמערכת שולחת להם תזכורת בוואטסאפ יום לפני. פחות טלפונים, פחות ביטולים.",
+      list: ["יומן תורים לכל עובד", "תזכורות ואישורי הגעה אוטומטיים בוואטסאפ", "רשימת המתנה שממלאת ביטולים"],
+      time: "2–3 שבועות", setup: "₪4,900", month: "₪290" },
+    { id: "TK-0104", title: "אפליקציה להזמנות ומועדון לקוחות",
+      sol: "אפליקציה עם הלוגו שלכם בטלפון של הלקוח: מזמינים, משלמים וצוברים נקודות, ואתם שולחים מבצעים בהתראה.",
+      list: ["הזמנה ותשלום מתוך האפליקציה", "מועדון לקוחות והטבות", "התראות פוש על מבצעים"],
+      time: "4–8 שבועות", setup: "₪14,000", month: "₪490" }
+  ];
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".problem"));
+  var body = document.getElementById("t-body");
+  function show(i) {
+    var t = tickets[i];
+    tabs.forEach(function (b, j) { b.setAttribute("aria-selected", j === i ? "true" : "false"); });
+    document.getElementById("t-id").textContent = t.id;
+    document.getElementById("t-title").textContent = t.title;
+    document.getElementById("t-sol").textContent = t.sol;
+    var ul = document.getElementById("t-list");
+    ul.innerHTML = "";
+    t.list.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ul.appendChild(li); });
+    document.getElementById("t-time").textContent = t.time;
+    document.getElementById("t-setup").textContent = t.setup;
+    document.getElementById("t-month").textContent = t.month;
+    body.classList.remove("swap"); void body.offsetWidth; body.classList.add("swap");
+  }
+  tabs.forEach(function (b, i) {
+    b.addEventListener("click", function () { show(i); });
+    b.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + tabs.length) % tabs.length; tabs[n].focus(); show(n);
+    });
+  });
+
+  // Spotlight follows the cursor on service cards
+  document.querySelectorAll(".svc").forEach(function (c) {
+    c.addEventListener("pointermove", function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      c.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+
+  // Lead form -> prepared WhatsApp message
+  var form = document.getElementById("lead-form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    var err = document.getElementById("f-err");
+    if (!v("f-name") || !v("f-phone")) { err.hidden = false; return; }
+    err.hidden = true;
+    var text = "היי תכלס, אשמח לשיחת אפיון.\n" +
+      "שם: " + v("f-name") + "\nטלפון: " + v("f-phone") +
+      (v("f-biz") ? "\nעסק: " + v("f-biz") : "") +
+      "\nצריך: " + v("f-need") +
+      (v("f-msg") ? "\nהבעיה: " + v("f-msg") : "");
+    document.getElementById("f-wa").href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+    document.getElementById("f-sent").hidden = false;
+  });
+})();
+</script>
+</body>
+</html>

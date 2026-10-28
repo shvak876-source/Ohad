@@ -8,45 +8,47 @@
 <meta name="description" content="תכלס דיגיטל בונה לעסקים אתרים, אפליקציות ומערכות ניהול לפי מה שהעסק צריך, ומלווה אותם בניהול חודשי.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Secular+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: one 1180px column; full-width bands alternate paper / ink; hero splits copy + live system mock */
 :root {
-  --bg: #F3F5F9;
+  --bg: #F5F8FC;
   --surface: #FFFFFF;
-  --ink: #0D1B2E;
-  --muted: #56647A;
-  --line: #DCE2EC;
-  --accent: #FFCC2E;      /* highlighter yellow: the "תכלס" mark */
-  --accent-ink: #1A1400;
-  --blue: #2350E0;        /* working colour: links, live data */
-  --band: #0D1B2E;        /* dark bands */
-  --band-fg: #E9EEF6;
-  --band-muted: #9AA8BE;
-  --ok: #17915A;
-  --warn: #C77700;
-  --shadow: 0 1px 2px rgba(13,27,46,.06), 0 12px 32px -12px rgba(13,27,46,.18);
-  --f-display: "Secular One", "Assistant", "Arial Hebrew", system-ui, sans-serif;
+  --ink: #0B1F3A;
+  --muted: #52637A;
+  --line: #DCE4EF;
+  --accent: #1F6FEB;      /* trust blue: actions and highlights */
+  --accent-ink: #FFFFFF;
+  --blue: #1A5BC4;        /* working colour: links, live data */
+  --band: #0B2545;        /* deep navy bands */
+  --band-fg: #EAF1FB;
+  --band-muted: #9DB0CC;
+  --band-accent: #6FB1FF;
+  --ok: #138A55;
+  --warn: #B86E00;
+  --shadow: 0 1px 2px rgba(11,31,58,.06), 0 14px 36px -14px rgba(11,37,69,.22);
+  --f-display: "Heebo", "Assistant", "Arial Hebrew", system-ui, sans-serif;
   --f-body: "Assistant", "Arial Hebrew", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r: 14px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0A111D; --surface: #111B2B; --ink: #E9EEF6; --muted: #9AA8BE; --line: #23314A;
-    --accent: #FFD23F; --accent-ink: #1A1400; --blue: #6F93FF; --band: #050A13; --band-fg: #E9EEF6; --band-muted: #8A98AE;
+    --bg: #08111F; --surface: #0F1C30; --ink: #E8EEF7; --muted: #9DB0CC; --line: #1F3150;
+    --accent: #4C9BFF; --accent-ink: #06101F; --blue: #7FB0FF; --band: #050C18; --band-fg: #E8EEF7; --band-muted: #8EA2C0; --band-accent: #6FB1FF;
     --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0A111D; --surface: #111B2B; --ink: #E9EEF6; --muted: #9AA8BE; --line: #23314A;
-  --accent: #FFD23F; --accent-ink: #1A1400; --blue: #6F93FF; --band: #050A13; --band-fg: #E9EEF6; --band-muted: #8A98AE;
-  --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+  --bg: #08111F; --surface: #0F1C30; --ink: #E8EEF7; --muted: #9DB0CC; --line: #1F3150;
+    --accent: #4C9BFF; --accent-ink: #06101F; --blue: #7FB0FF; --band: #050C18; --band-fg: #E8EEF7; --band-muted: #8EA2C0; --band-accent: #6FB1FF;
+    --ok: #3CCB89; --warn: #F2A93B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
@@ -55,7 +57,7 @@ body {
 }
 .site { direction: rtl; }
 a { color: inherit; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -.005em; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -.02em; }
 p { margin: 0; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
 
@@ -69,10 +71,8 @@ p { margin: 0; }
   color: var(--blue); display: inline-flex; gap: 10px; align-items: center;
 }
 .eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; }
-.mark {
-  background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%);
-  background-size: 100% 100%; background-repeat: no-repeat; padding-inline: 4px; color: inherit;
-}
+.mark { color: var(--accent); }
+.band .mark { color: var(--band-accent); }
 .section { padding-block: clamp(72px, 10vw, 128px); }
 .section-head { display: grid; gap: 14px; max-width: 720px; margin-bottom: 48px; }
 .section-head h2 { font-size: clamp(32px, 4.6vw, 52px); }
@@ -101,8 +101,8 @@ header.top {
 }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 16px; }
 .logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
-.logo b { font-family: var(--f-display); font-weight: 400; font-size: 30px; line-height: 1; position: relative; }
-.logo b::after { content: ""; position: absolute; inset: auto -3px 2px -3px; height: 9px; background: var(--accent); z-index: -1; border-radius: 2px; }
+.logo b { font-family: var(--f-display); font-weight: 800; font-size: 30px; line-height: 1; position: relative; }
+.logo b::after { content: ""; position: absolute; inset: auto -3px 3px -3px; height: 8px; background: color-mix(in srgb, var(--accent) 28%, transparent); z-index: -1; border-radius: 2px; }
 .logo small { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; }
 nav.links { display: flex; gap: 28px; }
 nav.links a { text-decoration: none; font-weight: 600; color: var(--muted); position: relative; transition: color .2s; }
@@ -180,8 +180,8 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .ticker-track { display: flex; gap: 0; width: max-content; animation: slide 38s linear infinite; }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker ul { display: flex; list-style: none; margin: 0; padding: 0; }
-.ticker li { font-family: var(--f-display); font-size: 22px; padding-inline: 28px; white-space: nowrap; display: flex; align-items: center; gap: 28px; }
-.ticker li::after { content: ""; width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg); }
+.ticker li { font-family: var(--f-display); font-weight: 700; font-size: 21px; padding-inline: 28px; white-space: nowrap; display: flex; align-items: center; gap: 28px; }
+.ticker li::after { content: ""; width: 8px; height: 8px; background: var(--band-accent); transform: rotate(45deg); }
 @keyframes slide { to { transform: translateX(50%); } }
 
 /* ---------- problem picker ---------- */
@@ -193,7 +193,7 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
   display: flex; gap: 14px; align-items: center; transition: border-color .2s, transform .2s, background .2s;
 }
 .problem:hover { border-color: var(--ink); transform: translateX(-4px); }
-.problem[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.problem[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .problem .q { font-family: var(--f-mono); font-size: 13px; opacity: .6; }
 .problem svg { width: 20px; height: 20px; margin-inline-start: auto; flex: none; opacity: 0; transition: opacity .2s, transform .2s; }
 .problem[aria-selected="true"] svg { opacity: 1; transform: translateX(-4px); }
@@ -207,12 +207,14 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .ticket .sol { color: var(--muted); }
 .ticket ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .ticket li { display: flex; gap: 10px; align-items: flex-start; }
-.ticket li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 10px; background: var(--accent); transform: rotate(45deg); }
+.ticket li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 10px; background: var(--accent); border-radius: 50%; }
 .ticket dl { margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
 .ticket dl div { padding: 16px 24px; display: grid; gap: 2px; }
 .ticket dl div + div { border-inline-start: 1px solid var(--line); }
 .ticket dt { font-size: 13px; color: var(--muted); }
-.ticket dd { margin: 0; font-family: var(--f-mono); font-size: 17px; font-variant-numeric: tabular-nums; }
+.ticket dd { margin: 0; font-weight: 700; font-size: 17px; }
+.ticket dd a { color: var(--accent); text-decoration: none; }
+.ticket dd a:hover { text-decoration: underline; }
 
 /* ---------- services ---------- */
 .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -223,7 +225,7 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
   transition: transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s; min-width: 0;
 }
 .svc:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); box-shadow: var(--shadow); }
-.svc-icon { width: 54px; height: 54px; border-radius: 14px; background: var(--ink); color: var(--accent); display: grid; place-items: center; }
+.svc-icon { width: 54px; height: 54px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); display: grid; place-items: center; }
 .svc-icon svg { width: 28px; height: 28px; }
 .svc h3 { font-size: 28px; }
 .svc p { color: var(--muted); }
@@ -234,19 +236,19 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 /* ---------- process (dark band) ---------- */
 .band { background: var(--band); color: var(--band-fg); }
 .band .section-head p { color: var(--band-muted); }
-.band .eyebrow { color: var(--accent); }
+.band .eyebrow { color: var(--band-accent); }
 .steps-wrap { position: relative; }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
 .steps-wrap::before { content: ""; position: absolute; inset: 27px 0 auto; height: 2px; background: color-mix(in srgb, var(--band-fg) 16%, transparent); }
-.steps-wrap .fill { position: absolute; inset: 27px 0 auto; height: 2px; background: var(--accent); transform-origin: right; transform: scaleX(1); }
+.steps-wrap .fill { position: absolute; inset: 27px 0 auto; height: 2px; background: var(--band-accent); transform-origin: right; transform: scaleX(1); }
 .step { position: relative; display: grid; gap: 12px; align-content: start; }
 .step .num {
   width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--band); border: 2px solid var(--accent); color: var(--accent); font-family: var(--f-mono); font-size: 18px; position: relative;
+  background: var(--band); border: 2px solid var(--band-accent); color: var(--band-accent); font-family: var(--f-mono); font-size: 18px; position: relative;
 }
 .step h3 { font-size: 24px; margin-top: 8px; }
 .step p { color: var(--band-muted); font-size: 17px; }
-.step .when { font-family: var(--f-mono); font-size: 13px; color: var(--accent); }
+.step .when { font-family: var(--f-mono); font-size: 13px; color: var(--band-accent); }
 
 /* ---------- commitments ---------- */
 .why { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
@@ -258,28 +260,11 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .commit h3 svg { width: 22px; height: 22px; color: var(--blue); flex: none; }
 .commit p { color: var(--muted); font-size: 17px; }
 
-/* ---------- pricing ---------- */
-.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: grid; gap: 18px; grid-template-rows: auto auto auto 1fr auto; transition: transform .3s, box-shadow .3s; }
-.plan:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.plan.hot { border: 2px solid var(--ink); position: relative; }
-.plan.hot::before { content: "הכי מבוקש"; position: absolute; top: -14px; inset-inline-start: 24px; background: var(--accent); color: var(--accent-ink); font-weight: 800; font-size: 13px; padding: 4px 12px; border-radius: 999px; }
-.plan h3 { font-size: 26px; }
-.plan > p { color: var(--muted); font-size: 16px; }
-.price { display: grid; gap: 4px; padding-block: 16px; border-block: 1px solid var(--line); }
-.price .setup { display: flex; align-items: baseline; gap: 8px; }
-.price .setup small, .price .monthly small { color: var(--muted); font-size: 14px; }
-.price b { font-family: var(--f-mono); font-weight: 500; font-size: 34px; font-variant-numeric: tabular-nums; }
-.price .monthly { font-family: var(--f-mono); font-size: 16px; }
-.plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; align-content: start; font-size: 16px; }
-.plan li { display: flex; gap: 10px; }
-.plan li svg { width: 18px; height: 18px; color: var(--ok); flex: none; margin-top: 4px; }
-.plan .btn { width: 100%; }
-.note { margin-top: 24px; color: var(--muted); font-size: 15px; }
-.monthly-box { margin-top: 40px; display: grid; grid-template-columns: auto 1fr; gap: 24px 40px; align-items: center; background: var(--ink); color: var(--bg); border-radius: 18px; padding: 32px; }
+/* ---------- monthly care ---------- */
+.monthly-box { margin-top: 48px; display: grid; grid-template-columns: auto 1fr; gap: 24px 40px; align-items: center; background: var(--band); color: var(--band-fg); border-radius: 18px; padding: 32px; }
 .monthly-box h3 { font-size: 28px; }
 .monthly-box ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
-.monthly-box li { border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); border-radius: 999px; padding: 6px 14px; font-size: 15px; font-weight: 600; }
+.monthly-box li { border: 1px solid color-mix(in srgb, var(--band-fg) 25%, transparent); border-radius: 999px; padding: 6px 14px; font-size: 15px; font-weight: 600; }
 
 /* ---------- faq ---------- */
 .faq { display: grid; gap: 0; border-top: 1px solid var(--line); max-width: 860px; }
@@ -290,6 +275,7 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .faq summary i::before, .faq summary i::after { content: ""; position: absolute; inset: 50% 9px auto; height: 2px; margin-top: -1px; background: var(--ink); }
 .faq summary i::after { transform: rotate(90deg); transition: transform .3s; }
 .faq details[open] summary i { background: var(--accent); border-color: var(--accent); }
+.faq details[open] summary i::before, .faq details[open] summary i::after { background: var(--accent-ink); }
 .faq details[open] summary i::after { transform: rotate(0); }
 .faq details p { color: var(--muted); padding-bottom: 24px; max-width: 65ch; }
 .faq details[open] p { animation: rise .4s ease both; }
@@ -301,7 +287,13 @@ nav.links a:hover::after { transform: scaleX(1); transform-origin: right; }
 .contact .lead p { color: var(--band-muted); font-size: 19px; }
 .contact .lead ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-weight: 600; }
 .contact .lead li { display: flex; gap: 10px; align-items: center; }
-.contact .lead li svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+.contact .lead li svg { width: 20px; height: 20px; color: var(--band-accent); flex: none; }
+.reach { display: grid; gap: 6px; padding: 20px 22px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--band-fg) 16%, transparent); }
+.reach small { color: var(--band-muted); font-size: 15px; }
+.reach-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.reach a.tel { font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 3vw, 34px); color: var(--band-fg); text-decoration: none; direction: ltr; user-select: all; }
+.copy { font: 700 14px var(--f-body); color: var(--band-fg); background: transparent; border: 1px solid color-mix(in srgb, var(--band-fg) 25%, transparent); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.copy:hover { border-color: var(--band-fg); }
 form.card { background: var(--surface); color: var(--ink); border-radius: 20px; padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; box-shadow: var(--shadow); }
 .field { display: grid; gap: 6px; }
 .field label { font-weight: 700; font-size: 15px; }
@@ -316,6 +308,8 @@ form.card { background: var(--surface); color: var(--ink); border-radius: 20px; 
 .sent { display: grid; gap: 12px; padding: 18px; border-radius: 14px; background: color-mix(in srgb, var(--ok) 12%, transparent); }
 .sent b { font-size: 18px; }
 .sent a { color: var(--ok); font-weight: 800; }
+form.card h3 { font-size: 24px; }
+form.card > p.sub { color: var(--muted); font-size: 16px; margin-top: -8px; }
 
 footer { background: var(--band); color: var(--band-muted); border-top: 1px solid color-mix(in srgb, var(--band-fg) 10%, transparent); }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 28px; font-size: 15px; }
@@ -351,7 +345,7 @@ footer .logo b span { position: relative; z-index: 1; }
   nav.links { display: none; }
   .hero .wrap, .picker, .why, .contact .wrap { grid-template-columns: 1fr; }
   .app { transform: none; }
-  .services, .plans { grid-template-columns: 1fr; max-width: 560px; }
+  .services { grid-template-columns: 1fr; max-width: 560px; }
   .steps { grid-template-columns: 1fr 1fr; row-gap: 40px; }
   .steps-wrap::before, .steps-wrap .fill { display: none; }
   .why .section-head, .ticket { position: static; }
@@ -382,10 +376,9 @@ footer .logo b span { position: relative; z-index: 1; }
       <a href="#solve">מה הבעיה?</a>
       <a href="#services">שירותים</a>
       <a href="#process">איך זה עובד</a>
-      <a href="#pricing">מחירים</a>
       <a href="#faq">שאלות</a>
     </nav>
-    <a class="btn btn-primary" href="#contact">לשיחת אפיון</a>
+    <a class="btn btn-primary" href="#contact">לשיחת ייעוץ</a>
   </div>
 </header>
 
@@ -397,16 +390,16 @@ footer .logo b span { position: relative; z-index: 1; }
     <div class="hero-copy">
       <span class="eyebrow load" style="--i:0">סטודיו לבניית מערכות לעסקים</span>
       <h1 class="load" style="--i:1"><span class="line">יש בעיה בעסק?</span><span class="line"><span class="mark">בונים לה פתרון.</span></span></h1>
-      <p class="load" style="--i:2">אתר, אפליקציה או מערכת ניהול. אתם מספרים לנו מה תוקע את העסק, אנחנו בונים בדיוק את מה שצריך, מעלים לאוויר ונשארים איתכם עם ניהול חודשי. בלי שפה טכנית ובלי הפתעות במחיר.</p>
+      <p class="load" style="--i:2">אתר, אפליקציה או מערכת ניהול. אתם מספרים לנו מה תוקע את העסק, אנחנו בונים בדיוק את מה שצריך, מעלים לאוויר ונשארים איתכם עם ליווי חודשי. בלי שפה טכנית ובלי הפתעות.</p>
       <div class="hero-cta load" style="--i:3">
-        <a class="btn btn-primary" href="#contact">ספרו לנו מה צריך
+        <a class="btn btn-primary" href="#contact">לשיחת ייעוץ חינם
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
         </a>
         <a class="btn btn-ghost" href="#solve">איך זה נראה אצלכם</a>
       </div>
       <ul class="promises load" style="--i:4">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>שיחת אפיון בלי עלות</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מחיר סגור לפני שמתחילים</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>שיחת ייעוץ ללא עלות</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הצעה כתובה לפני שמתחילים</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>עדכון התקדמות כל שבוע</li>
       </ul>
     </div>
@@ -455,7 +448,7 @@ footer .logo b span { position: relative; z-index: 1; }
     <div class="section-head reveal">
       <span class="eyebrow">מתחילים מהבעיה</span>
       <h2>מה <span class="mark">תוקע</span> אתכם היום?</h2>
-      <p>בחרו את המשפט שהכי מתאים לעסק שלכם, ותראו מה היינו בונים לכם, כמה זמן זה לוקח ואיך זה מתומחר.</p>
+      <p>בחרו את המשפט שהכי מתאים לעסק שלכם, ותראו מה היינו בונים לכם וכמה זמן זה לוקח. את הפרטים סוגרים יחד בשיחת ייעוץ.</p>
     </div>
     <div class="picker">
       <div class="problems" role="tablist" aria-label="בעיות נפוצות בעסקים">
@@ -478,8 +471,8 @@ footer .logo b span { position: relative; z-index: 1; }
         </div>
         <dl>
           <div><dt>זמן עבודה</dt><dd id="t-time">1–2 שבועות</dd></div>
-          <div><dt>הקמה החל מ־</dt><dd id="t-setup">₪2,900</dd></div>
-          <div><dt>ניהול חודשי</dt><dd id="t-month">₪190</dd></div>
+          <div><dt>אחרי העלייה</dt><dd id="t-after">ליווי חודשי</dd></div>
+          <div><dt>הצעד הראשון</dt><dd><a href="#contact">שיחת ייעוץ ←</a></dd></div>
         </dl>
       </article>
     </div>
@@ -540,8 +533,8 @@ footer .logo b span { position: relative; z-index: 1; }
     <div class="steps-wrap">
     <span class="fill" aria-hidden="true"></span>
     <ol class="steps reveal-stagger">
-      <li class="step"><span class="num">1</span><span class="when">יום 1</span><h3>שיחת אפיון</h3><p>שומעים איך העסק עובד היום, איפה הוא נתקע ומה יעזור לו באמת. לפעמים הפתרון קטן ממה שחשבתם.</p></li>
-      <li class="step"><span class="num">2</span><span class="when">תוך 48 שעות</span><h3>הצעה במחיר סגור</h3><p>מסמך קצר: מה בונים, איך זה ייראה, כמה זמן זה לוקח וכמה זה עולה. המחיר לא משתנה באמצע.</p></li>
+      <li class="step"><span class="num">1</span><span class="when">יום 1</span><h3>שיחת ייעוץ</h3><p>שומעים איך העסק עובד היום, איפה הוא נתקע ומה יעזור לו באמת. לפעמים הפתרון קטן ממה שחשבתם.</p></li>
+      <li class="step"><span class="num">2</span><span class="when">תוך 48 שעות</span><h3>הצעה מסודרת</h3><p>מסמך קצר וברור: מה בונים, איך זה ייראה וכמה זמן זה לוקח. מה שסגרנו זה מה שמקבלים.</p></li>
       <li class="step"><span class="num">3</span><span class="when">כל שבוע</span><h3>בנייה שאתם רואים</h3><p>מקבלים קישור לגרסה עובדת ורואים את ההתקדמות בעצמכם. הערות נכנסות כבר בשבוע הבא.</p></li>
       <li class="step"><span class="num">4</span><span class="when">מהעלייה לאוויר</span><h3>עולים ונשארים</h3><p>מעלים לאוויר, מדריכים אתכם ואת העובדים, ונשארים איתכם בניהול חודשי: תמיכה, גיבויים ושיפורים.</p></li>
     </ol>
@@ -551,79 +544,31 @@ footer .logo b span { position: relative; z-index: 1; }
 
 <!-- WHY US -->
 <section class="section">
-  <div class="wrap why">
+  <div class="wrap">
+  <div class="why">
     <div class="section-head reveal">
       <span class="eyebrow">למה אנחנו</span>
       <h2>מה מקבלים כשעובדים <span class="mark">איתנו</span></h2>
       <p>לא מוכרים לכם טכנולוגיה. בונים לכם כלי עבודה שחוסך זמן ומכניס כסף, ומתחייבים לזה בכתב.</p>
     </div>
     <div class="commit reveal-stagger">
-      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>מחיר סגור מראש</h3><p>מה שכתוב בהצעה זה מה שמשלמים. תוספות רק אם ביקשתם אותן ואישרתם מחיר.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>הכל סגור מראש</h3><p>מה שכתוב בהצעה זה מה שמקבלים. בלי תוספות שלא ביקשתם ובלי הפתעות באמצע.</p></div>
       <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 7a4 4 0 1 1-4 4M11 11l-8 8M6 16l2 2M8 14l2 2"/></svg>המערכת שייכת לכם</h3><p>הקוד, הדומיין והנתונים רשומים על שמכם. לא ננעלים אצלנו.</p></div>
       <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>רואים התקדמות כל שבוע</h3><p>גרסה עובדת בקישור, לא מצגות. אתם לוחצים, בודקים ומעירים.</p></div>
-      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg>ניהול חודשי בלי התחייבות</h3><p>משלמים כל חודש ואפשר להפסיק מתי שרוצים. נשארים כי זה שווה, לא בגלל חוזה.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg>ליווי חודשי בלי התחייבות</h3><p>אחרי העלייה לאוויר אנחנו ממשיכים לתחזק ולשפר. אפשר להפסיק מתי שרוצים.</p></div>
       <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg>זמינים בוואטסאפ</h3><p>יש תקלה או רעיון? שולחים הודעה ומקבלים תשובה באותו יום עסקים.</p></div>
       <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>אבטחה וגיבויים</h3><p>אחסון מאובטח, תעודת SSL וגיבוי יומי. אם משהו קורה, חוזרים לאתמול בכמה דקות.</p></div>
     </div>
   </div>
-</section>
-
-<!-- PRICING -->
-<section class="section" id="pricing" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">מחירים</span>
-      <h2>הקמה חד־פעמית + ניהול חודשי</h2>
-      <p>משלמים פעם אחת על הבנייה, ואחר כך סכום חודשי קבוע שמחזיק את המערכת חיה, מעודכנת ומגובה.</p>
-    </div>
-    <div class="plans reveal-stagger">
-      <article class="plan">
-        <h3>נוכחות</h3>
-        <p>לעסק שצריך להופיע ברשת ולקבל פניות.</p>
-        <div class="price"><div class="setup"><small>החל מ־</small><b>₪2,900</b></div><div class="monthly">+ ₪190 <small>לחודש</small></div></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אתר תדמית עד 5 עמודים</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>טופס פניות וכפתור וואטסאפ</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>חיבור לגוגל מפות וקידום בסיסי</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אחסון, דומיין ו־SSL</li>
-        </ul>
-        <a class="btn btn-ghost" href="#contact">לבדיקת התאמה</a>
-      </article>
-      <article class="plan hot">
-        <h3>ניהול</h3>
-        <p>לעסק שרוצה להפסיק לנהל באקסל ובראש.</p>
-        <div class="price"><div class="setup"><small>החל מ־</small><b>₪7,500</b></div><div class="monthly">+ ₪390 <small>לחודש</small></div></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>מערכת ניהול מותאמת לעסק</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>לקוחות, תורים, הזמנות ודוחות</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>תזכורות אוטומטיות בוואטסאפ</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>משתמשים והרשאות לעובדים</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הדרכה לצוות</li>
-        </ul>
-        <a class="btn btn-primary" href="#contact">בואו נאפיין</a>
-      </article>
-      <article class="plan">
-        <h3>אפליקציה</h3>
-        <p>לעסק שרוצה ללקוחות שלו מקום בטלפון.</p>
-        <div class="price"><div class="setup"><small>החל מ־</small><b>₪14,000</b></div><div class="monthly">+ ₪490 <small>לחודש</small></div></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אפליקציה לאייפון ולאנדרואיד</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הזמנות ותשלום באפליקציה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>התראות פוש ומועדון לקוחות</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ממשק ניהול לבעל העסק</li>
-        </ul>
-        <a class="btn btn-ghost" href="#contact">לבדיקת התאמה</a>
-      </article>
-    </div>
     <div class="monthly-box reveal">
-      <h3>מה כולל הניהול החודשי?</h3>
+      <h3>מה כולל הליווי החודשי?</h3>
       <ul>
         <li>אחסון ודומיין</li><li>גיבוי יומי</li><li>עדכוני אבטחה</li><li>תיקון תקלות</li><li>שינויים קטנים בתוכן</li><li>תמיכה בוואטסאפ</li><li>דוח חודשי</li>
       </ul>
     </div>
-    <p class="note">המחירים לפני מע״מ. המחיר הסופי נקבע אחרי שיחת האפיון ונסגר בהצעה כתובה.</p>
   </div>
 </section>
+
 
 <!-- FAQ -->
 <section class="section" id="faq" style="padding-top:0">
@@ -635,9 +580,9 @@ footer .logo b span { position: relative; z-index: 1; }
     <div class="faq reveal">
       <details open><summary>אני לא מבין בטכנולוגיה. זה בעיה?<i aria-hidden="true"></i></summary><p>ממש לא. אתם מסבירים לנו איך העסק עובד, ואנחנו מתרגמים את זה למערכת. כל ההסברים וההדרכות בשפה פשוטה.</p></details>
       <details><summary>כמה זמן לוקח פרויקט?<i aria-hidden="true"></i></summary><p>אתר תדמית לוקח בדרך כלל שבוע עד שבועיים. מערכת ניהול שלושה עד חמישה שבועות, ואפליקציה ארבעה עד שמונה שבועות. הזמן המדויק כתוב בהצעה.</p></details>
-      <details><summary>מה קורה אם ארצה להפסיק את הניהול החודשי?<i aria-hidden="true"></i></summary><p>מודיעים לנו ומפסיקים. אנחנו מעבירים לכם את כל הקוד, הנתונים והגישות, כדי שתוכלו להמשיך לבד או עם מישהו אחר.</p></details>
+      <details><summary>מה קורה אם ארצה להפסיק את הליווי החודשי?<i aria-hidden="true"></i></summary><p>מודיעים לנו ומפסיקים. אנחנו מעבירים לכם את כל הקוד, הנתונים והגישות, כדי שתוכלו להמשיך לבד או עם מישהו אחר.</p></details>
       <details><summary>אפשר להתחיל קטן ולהוסיף אחר כך?<i aria-hidden="true"></i></summary><p>כן, וזה מה שאנחנו ממליצים. מתחילים ממה שהכי כואב, ואחרי שזה עובד מוסיפים עוד חלקים. הכל בנוי כך שיתחבר.</p></details>
-      <details><summary>איך משלמים?<i aria-hidden="true"></i></summary><p>על ההקמה משלמים בשלושה חלקים לפי התקדמות: בתחילת העבודה, באמצע ובעלייה לאוויר. הניהול החודשי בהוראת קבע או בכרטיס אשראי. מקבלים חשבונית על כל תשלום.</p></details>
+      <details><summary>כמה זה עולה?<i aria-hidden="true"></i></summary><p>כל עסק צריך משהו אחר, ולכן אין מחירון קבוע. אחרי שיחת ייעוץ קצרה וללא עלות תקבלו הצעה כתובה ומסודרת, ורק אז מחליטים.</p></details>
     </div>
   </div>
 </section>
@@ -648,14 +593,20 @@ footer .logo b span { position: relative; z-index: 1; }
     <div class="lead reveal">
       <span class="eyebrow">בואו נדבר תכלס</span>
       <h2>ספרו לנו מה תוקע את העסק. נחזור אליכם עם פתרון.</h2>
-      <p>שיחת אפיון של 20 דקות, בלי עלות ובלי התחייבות. בסופה תדעו מה כדאי לבנות, כמה זמן זה ייקח וכמה זה יעלה.</p>
+      <p>שיחת ייעוץ של 20 דקות, בלי עלות ובלי התחייבות. בסופה תדעו מה כדאי לבנות ואיך זה יעבוד אצלכם.</p>
+      <div class="reach">
+        <small>מעדיפים לדבר עכשיו? התקשרו אלינו</small>
+        <div class="reach-row"><a class="tel" id="phone" href="tel:+972500000000">050-000-0000</a><button class="copy" type="button" id="copy-phone">העתקת המספר</button></div>
+      </div>
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>חוזרים אליכם באותו יום עסקים</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הצעת מחיר כתובה תוך 48 שעות</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>הצעה כתובה תוך 48 שעות</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>אם אנחנו לא הכתובת, נגיד לכם</li>
       </ul>
     </div>
     <form class="card reveal" id="lead-form" novalidate>
+      <h3>השאירו פרטים ונחזור אליכם</h3>
+      <p class="sub">ממלאים דקה, ואנחנו מתקשרים לתאם שיחת ייעוץ.</p>
       <div class="two">
         <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name" placeholder="ישראל ישראלי" required></div>
         <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" style="text-align:right" required></div>
@@ -668,12 +619,16 @@ footer .logo b span { position: relative; z-index: 1; }
       </div>
       <div class="field"><label for="f-msg">ספרו בקצרה מה הבעיה</label><textarea id="f-msg" name="msg" placeholder="למשל: אני מתאם את כל התורים בוואטסאפ ולקוחות שוכחים להגיע"></textarea></div>
       <p class="err" id="f-err" hidden>נא למלא שם ומספר טלפון כדי שנוכל לחזור אליכם.</p>
-      <button class="btn btn-primary" type="submit">שליחה וקביעת שיחה
+      <button class="btn btn-primary" type="submit" id="f-submit">שליחת פנייה
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
       </button>
       <div class="sent" id="f-sent" hidden>
-        <b>הפרטים מוכנים לשליחה.</b>
-        <span>לחצו כדי לשלוח לנו אותם בהודעת וואטסאפ, ונחזור אליכם עוד היום.</span>
+        <b>תודה, קיבלנו את הפנייה.</b>
+        <span>נחזור אליכם עוד היום לתיאום שיחת ייעוץ.</span>
+      </div>
+      <div class="sent" id="f-wa-box" hidden>
+        <b>הפרטים מוכנים.</b>
+        <span>לחצו כדי לשלוח לנו אותם בוואטסאפ, ונחזור אליכם עוד היום.</span>
         <a id="f-wa" href="https://wa.me/" target="_blank" rel="noopener">שליחה בוואטסאפ ←</a>
       </div>
     </form>
@@ -694,26 +649,28 @@ footer .logo b span { position: relative; z-index: 1; }
 
 <script>
 (function () {
-  // Business WhatsApp number in international format, e.g. "972501234567". Empty = the visitor picks a contact.
+  // Where leads go. FORM_ENDPOINT: a form service URL (e.g. Formspree) that emails each lead.
+  // Without it the form falls back to a prepared WhatsApp message to WHATSAPP_NUMBER ("972501234567").
+  var FORM_ENDPOINT = "";
   var WHATSAPP_NUMBER = "";
 
   var tickets = [
     { id: "TK-0101", title: "אתר תדמית שמביא פניות",
       sol: "אתר מהיר ומעוצב שמסביר בדיוק מה אתם עושים, מופיע בגוגל ומוביל את הגולש לשיחה או להודעת וואטסאפ.",
       list: ["עיצוב מותאם למותג שלכם, שנראה מצוין בטלפון", "קידום אורגני בסיסי וחיבור לגוגל מפות", "טופס פניות וכפתור וואטסאפ שמגיעים ישר אליכם"],
-      time: "1–2 שבועות", setup: "₪2,900", month: "₪190" },
+      time: "1–2 שבועות" },
     { id: "TK-0102", title: "מערכת ניהול לקוחות והזמנות",
       sol: "מסך אחד שמחליף את האקסל, המחברת והקבוצות בוואטסאפ. כל לקוח, הזמנה ותשלום במקום אחד, מכל מחשב או טלפון.",
       list: ["כרטיס לקוח עם היסטוריה מלאה", "מעקב הזמנות ותשלומים בזמן אמת", "דוח הכנסות חודשי בלחיצה"],
-      time: "3–5 שבועות", setup: "₪7,500", month: "₪390" },
+      time: "3–5 שבועות" },
     { id: "TK-0103", title: "זימון תורים אונליין עם תזכורות",
       sol: "הלקוחות קובעים תור לבד מהטלפון, והמערכת שולחת להם תזכורת בוואטסאפ יום לפני. פחות טלפונים, פחות ביטולים.",
       list: ["יומן תורים לכל עובד", "תזכורות ואישורי הגעה אוטומטיים בוואטסאפ", "רשימת המתנה שממלאת ביטולים"],
-      time: "2–3 שבועות", setup: "₪4,900", month: "₪290" },
+      time: "2–3 שבועות" },
     { id: "TK-0104", title: "אפליקציה להזמנות ומועדון לקוחות",
       sol: "אפליקציה עם הלוגו שלכם בטלפון של הלקוח: מזמינים, משלמים וצוברים נקודות, ואתם שולחים מבצעים בהתראה.",
       list: ["הזמנה ותשלום מתוך האפליקציה", "מועדון לקוחות והטבות", "התראות פוש על מבצעים"],
-      time: "4–8 שבועות", setup: "₪14,000", month: "₪490" }
+      time: "4–8 שבועות" }
   ];
 
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".problem"));
@@ -728,8 +685,6 @@ footer .logo b span { position: relative; z-index: 1; }
     ul.innerHTML = "";
     t.list.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ul.appendChild(li); });
     document.getElementById("t-time").textContent = t.time;
-    document.getElementById("t-setup").textContent = t.setup;
-    document.getElementById("t-month").textContent = t.month;
     body.classList.remove("swap"); void body.offsetWidth; body.classList.add("swap");
   }
   tabs.forEach(function (b, i) {
@@ -757,16 +712,45 @@ footer .logo b span { position: relative; z-index: 1; }
     e.preventDefault();
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var err = document.getElementById("f-err");
-    if (!v("f-name") || !v("f-phone")) { err.hidden = false; return; }
+    if (!v("f-name") || !v("f-phone")) { err.textContent = "נא למלא שם ומספר טלפון כדי שנוכל לחזור אליכם."; err.hidden = false; return; }
     err.hidden = true;
-    var text = "היי תכלס, אשמח לשיחת אפיון.\n" +
+    var text = "היי תכלס, אשמח לשיחת ייעוץ.\n" +
       "שם: " + v("f-name") + "\nטלפון: " + v("f-phone") +
       (v("f-biz") ? "\nעסק: " + v("f-biz") : "") +
       "\nצריך: " + v("f-need") +
       (v("f-msg") ? "\nהבעיה: " + v("f-msg") : "");
-    document.getElementById("f-wa").href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
-    document.getElementById("f-sent").hidden = false;
+    if (!FORM_ENDPOINT) {
+      document.getElementById("f-wa").href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+      document.getElementById("f-wa-box").hidden = false;
+      return;
+    }
+    var btn = document.getElementById("f-submit");
+    btn.disabled = true;
+    fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ name: v("f-name"), phone: v("f-phone"), business: v("f-biz"), need: v("f-need"), message: v("f-msg") }) })
+      .then(function (r) {
+        if (!r.ok) throw new Error();
+        form.querySelectorAll(".field, .two, #f-submit").forEach(function (el) { el.hidden = true; });
+        document.getElementById("f-sent").hidden = false;
+      })
+      .catch(function () {
+        err.textContent = "השליחה לא עברה. נסו שוב או התקשרו אלינו.";
+        err.hidden = false;
+        btn.disabled = false;
+      });
   });
+
+  document.getElementById("copy-phone").addEventListener("click", function (e) {
+    var b = e.currentTarget, num = document.getElementById("phone").textContent;
+    var done = function () { b.textContent = "הועתק"; setTimeout(function () { b.textContent = "העתקת המספר"; }, 1800); };
+    try {
+      navigator.clipboard.writeText(num).then(done, function () { selectPhone(); });
+    } catch (x) { selectPhone(); }
+  });
+  function selectPhone() {
+    var r = document.createRange(); r.selectNodeContents(document.getElementById("phone"));
+    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  }
 })();
 </script>
 </body>
